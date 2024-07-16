@@ -175,6 +175,8 @@ void HeatingController()
   if(phaseCounter > (instructionCount-1)) // when there are no more instructions
   {
      sender.send(OFF,24); // turn off heating
+     delay(200);
+     sender.send(OFF,24);
      lcd.clear();
      lcd.print("Finished all instructions!");
      wantedTemp = 0;
