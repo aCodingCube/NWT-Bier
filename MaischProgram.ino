@@ -25,7 +25,7 @@ RCSwitch sender = RCSwitch();
 // define Enum
 enum
 {
-  OFF  = 10359934, ON
+  ON  = 2659447, OFF = 2659446
 };
 
 // variables
@@ -140,6 +140,8 @@ void loop()
   }
   Serial.print("[DEBUG] PID-Result: ");
   Serial.println(PIDresult);
+  Serial.print(":");
+  Serial.println(millis() - PIDtime);
 }
 
 void TempController()
@@ -162,9 +164,10 @@ void HeatingController()
   {
     sender.send(OFF,24); // turn heating off
   }
-  else if((millis() - PIDtime) > highOutputLimit) // if timeframe is over
+  if((millis() - PIDtime) > highOutputLimit) // if timeframe is over
   {
     PIDtime = millis();
+    delay(200);
     sender.send(ON,24); // turn heating on
     
   }
